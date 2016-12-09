@@ -1,0 +1,37 @@
+<link rel="import" href="../bower_components/polymer/polymer.html"/>
+<link rel="import" href="../bower_components/paper-material/paper-material.html"/>
+
+<dom-module id="minesweeper-cell">
+
+    <style>
+        paper-material {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            margin: 2px;
+        }
+    </style>
+
+    <template>
+        <paper-material elevation="1">
+            {{cell.surroundingMines}}
+        </paper-material>
+    </template>
+
+    <script>
+        Polymer({
+
+            is: 'minesweeper-cell',
+
+            properties: {
+                //target: {
+                //    type: Object,
+                //    value: function() {
+                //        return this.$.input;
+                //    }
+            }
+
+        });
+    </script>
+
+</dom-module>

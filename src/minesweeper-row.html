@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer.html"/>
+<link rel="import" href="minesweeper-cell.html"/>
+
+<dom-module id="minesweeper-row">
+
+    <style>
+        minesweeper-cell {
+            //background-color: yellow;
+        }
+    </style>
+
+    <template>
+        <!-- observe="revealed flagged" -->
+        <template is="dom-repeat" as="cell" items="{{row}}">
+            <minesweeper-cell cell="{{cell}}"></minesweeper-cell>
+        </template>
+    </template>
+
+    <script>
+        Polymer({
+
+            is: 'minesweeper-row',
+
+            properties: {
+                //target: {
+                //    type: Object,
+                //    value: function() {
+                //        return this.$.input;
+                //    }
+            }
+
+        });
+    </script>
+
+</dom-module>
