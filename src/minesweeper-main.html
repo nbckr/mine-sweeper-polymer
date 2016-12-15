@@ -1,10 +1,38 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="../bower_components/paper-button/paper-button.html"/>
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html"/>
 <link rel="import" href="minesweeper-grid.html"/>
 
 <dom-module id="minesweeper-main">
 
-    <style>
+    <style is="custom-style">
+        iron-icon {
+            margin-right: 5px;
+        }
+
+        paper-button.custom {
+            --paper-button-ink-color: var(--paper-pink-a200);
+            --paper-button-flat-keyboard-focus: {
+                background-color: var(--paper-pink-a200);
+                color: white !important;
+            };
+            --paper-button-raised-keyboard-focus: {
+                background-color: var(--paper-pink-a200) !important;
+                color: white !important;
+            };
+        }
+        paper-button.custom:hover {
+            background-color: var(--paper-indigo-100);
+        }
+        paper-button.indigo {
+            background-color: var(--paper-indigo-500);
+            color: white;
+            --paper-button-raised-keyboard-focus: {
+                background-color: var(--paper-pink-a200) !important;
+                color: white !important;
+            };
+        }
     </style>
 
     <template>
@@ -26,6 +54,10 @@
                 handle-as="json"
                 on-response="_refreshGameData"
         ></iron-ajax>
+
+        <paper-button raised class="custom indigo" on-click="_handleNewGame">
+            <iron-icon icon="add-circle"></iron-icon> Start new game
+        </paper-button>
 
         <minesweeper-grid gamedata="{{gamedata}}"></minesweeper-grid>
 
@@ -56,6 +88,12 @@
                 event.stopPropagation();
                 this.$.ajaxposter.body = event.detail;
                 this.$.ajaxposter.generateRequest();
+            },
+
+            _handleNewGame: function () {
+                this.fire('ajax-post', {
+                    action: 'restart'
+                });
             }
         });
 
