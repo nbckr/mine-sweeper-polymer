@@ -10,16 +10,26 @@
     </style>
 
     <template>
+
+        <div class="just-test" on-ajax-post="justTest()"></div>
         <!-- observe="revealed flagged" -->
         <template is="dom-repeat" as="cell" items="{{row}}">
             <minesweeper-cell cell="{{cell}}"></minesweeper-cell>
         </template>
+
+
+
+
     </template>
 
     <script>
         Polymer({
 
             is: 'minesweeper-row',
+
+            justTest: function () {
+                console.log('i hear you');
+            },
 
             properties: {
                 //target: {

@@ -13,9 +13,10 @@
     </style>
 
     <template>
-        <paper-material elevation="1">
+        <paper-material elevation="1" on-tap="_handleTap">
             {{cell.surroundingMines}}
         </paper-material>
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     </template>
 
     <script>
@@ -29,8 +30,26 @@
                 //    value: function() {
                 //        return this.$.input;
                 //    }
-            }
+            },
 
+            _handleTap: function (event) {
+                if (event.detail.sourceEvent.button === 0) {
+                    this.fire('ajax-post', {
+                        action: 'reveal',
+                        row: this.cell.position.row,
+                        col: this.cell.position.col
+                    });
+                }
+
+                else if (event.detail.sourceEvent.button === 2) {
+                    this.fire('ajax-post', {
+                        action: 'flag',
+                        row: this.cell.position.row,
+                        col: this.cell.position.col
+                    });
+                }
+
+            }
         });
     </script>
 

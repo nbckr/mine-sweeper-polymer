@@ -1,0 +1,52 @@
+<link rel="import" href="../bower_components/polymer/polymer.html"/>
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="minesweeper-data.html"/>
+<link rel="import" href="minesweeper-grid.html"/>
+
+<dom-module id="minesweeper-main">
+
+    <style>
+    </style>
+
+    <template>
+        <minesweeper-data gamedata="{{gamedata}}"></minesweeper-data>
+
+        <iron-ajax on-ajax-post="handleTest()"
+                   url="http://localhost:9000/game/json"
+                   params='{{ajaxdata}}'
+                   handle-as="json"
+                   on-response="handleResponse"
+                   debounce-duration="300"
+                   verbose
+        ></iron-ajax>
+
+        <minesweeper-grid gamedata="{{gamedata}}"></minesweeper-grid>
+
+
+    </template>
+
+    <script>
+        Polymer({
+
+            is: 'minesweeper-main',
+
+            properties: {
+                //target: {
+                //    type: Object,
+                //    value: function() {
+                //        return this.$.input;
+                //    }
+            },
+
+            listeners: {
+                'ajax-post': 'handleAjaxPost'
+            },
+
+            handleAjaxPost: function (data) {
+                console.log("It works");
+            }
+        });
+
+    </script>
+
+</dom-module>

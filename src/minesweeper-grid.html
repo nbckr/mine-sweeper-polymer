@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
-<link rel="import" href="minesweeper-data.html"/>
 <link rel="import" href="minesweeper-row.html"/>
 
 <dom-module id="minesweeper-grid">
@@ -12,9 +11,6 @@
     </style>
 
     <template>
-
-        <minesweeper-data gamedata="{{gamedata}}"></minesweeper-data>
-
         <template is="dom-repeat" as="row" items="{{gamedata.grid}}">
             <minesweeper-row row="{{row}}"></minesweeper-row>
         </template>
