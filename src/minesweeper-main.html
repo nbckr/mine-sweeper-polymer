@@ -1,6 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html"/>
-<link rel="import" href="minesweeper-data.html"/>
 <link rel="import" href="minesweeper-grid.html"/>
 
 <dom-module id="minesweeper-main">
@@ -9,19 +8,26 @@
     </style>
 
     <template>
-        <minesweeper-data gamedata="{{gamedata}}"></minesweeper-data>
 
-        <iron-ajax on-ajax-post="handleTest()"
-                   url="http://localhost:9000/game/json"
-                   params='{{ajaxdata}}'
-                   handle-as="json"
-                   on-response="handleResponse"
-                   debounce-duration="300"
-                   verbose
+        <iron-ajax
+                id="ajaxgetter"
+                url="http://localhost:9000/game/json"
+                method="GET"
+                content-type="application/json"
+                handle-as="json"
+                last-response="{{gamedata}}"
+        ></iron-ajax>
+
+        <iron-ajax
+                id="ajaxposter"
+                url="http://localhost:9000/game/json"
+                method="POST"
+                content-type="application/json"
+                handle-as="json"
+                on-response="_refreshGameData"
         ></iron-ajax>
 
         <minesweeper-grid gamedata="{{gamedata}}"></minesweeper-grid>
-
 
     </template>
 
@@ -30,20 +36,26 @@
 
             is: 'minesweeper-main',
 
-            properties: {
-                //target: {
-                //    type: Object,
-                //    value: function() {
-                //        return this.$.input;
-                //    }
+            ready: function () {
+                console.log("main: ready");
+                this._refreshGameData();
             },
 
             listeners: {
-                'ajax-post': 'handleAjaxPost'
+                'ajax-post': '_handleAjaxPost',
+                'server-response': '_refreshGameData'
             },
 
-            handleAjaxPost: function (data) {
-                console.log("It works");
+            _refreshGameData: function () {
+                console.log("main: refresh");
+                this.$.ajaxgetter.generateRequest();
+            },
+
+            _handleAjaxPost: function (event) {
+                console.log(event);
+                event.stopPropagation();
+                this.$.ajaxposter.body = event.detail;
+                this.$.ajaxposter.generateRequest();
             }
         });
 
