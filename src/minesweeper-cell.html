@@ -15,13 +15,42 @@
             border-radius: 2px;
             text-align: center;
         }
+
+        paper-material.blabla {
+            background-color: yellow;
+        }
+
+        paper-material.surrounding-0 {
+            background-color: #8bc34a;
+        }
+        paper-material.surrounding-1 {
+            background-color: #ffeb3b;
+        }
+        paper-material.surrounding-2 {
+            background-color: #ffc107;
+        }
+        paper-material.surrounding-3,
+        paper-material.surrounding-4,
+        paper-material.surrounding-5,
+        paper-material.surrounding-6,
+        paper-material.surrounding-7,
+        paper-material.surrounding-8 {
+            background-color: #ea7f3b;
+        }
+        paper-material.mine {
+            background-color: #c0392b;
+        }
     </style>
 
     <template>
-        <paper-material elevation="1" animated on-tap="_handleTap" on-mouseover="_animateMouseover" on-mouseout="_animateMouseout">
-            {{cell.surroundingMines}}
+        <paper-material
+                elevation="1"
+                animated
+                on-tap="_handleTap"
+                on-mouseover="_animateMouseover"
+                on-mouseout="_animateMouseout">
+            <span hidden="true">{{cell.surroundingMines}}</span>
         </paper-material>
-        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     </template>
 
     <script>
@@ -30,11 +59,19 @@
             is: 'minesweeper-cell',
 
             properties: {
-                //target: {
-                //    type: Object,
-                //    value: function() {
-                //        return this.$.input;
-                //    }
+                cell: {
+                    type: Object
+                }
+            },
+
+            ready: function() {
+                this.$$('paper-material').className += this._computeClass();
+            },
+
+            _computeClass: function() {
+                console.log("hi")
+                console.log(this.cell)
+                return "blabla surrounding-" + this.cell.surroundingMines;
             },
 
             _handleTap: function (event) {
