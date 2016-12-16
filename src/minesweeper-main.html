@@ -2,7 +2,10 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html"/>
 <link rel="import" href="../bower_components/paper-button/paper-button.html"/>
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html"/>
+<link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html"/>
+
 <link rel="import" href="minesweeper-grid.html"/>
+<link rel="import" href="minesweeper-dialogue.html"/>
 
 <dom-module id="minesweeper-main">
 
@@ -63,6 +66,12 @@
 
         <minesweeper-grid gamedata="{{gamedata}}"></minesweeper-grid>
 
+        <minesweeper-dialogue id="backdrop" with-backdrop always-on-top>
+            <p>Hello world!</p>
+            <button>Button</button>
+            <button onclick="backdrop.close()">Close</button>
+        </minesweeper-dialogue>
+
     </template>
 
     <script>
@@ -97,6 +106,9 @@
             },
 
             _handleNewGame: function () {
+                console.log(this.$$('#backdrop'));
+                this.$$('#backdrop').open();
+
                 this.fire('ajax-post', {
                     action: 'restart'
                 });
