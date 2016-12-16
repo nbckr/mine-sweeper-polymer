@@ -5,7 +5,7 @@
     "src/view-game.html",
     "src/view-instructions.html",
     "src/view-about.html",
-    "src/view404.html"
+    "src/view-404.html"
   ],
   "sourceGlobs": [
    "src/**/*",

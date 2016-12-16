@@ -44,6 +44,7 @@
                 content-type="application/json"
                 handle-as="json"
                 last-response="{{gamedata}}"
+                on-error="_logError"
         ></iron-ajax>
 
         <iron-ajax
@@ -53,6 +54,7 @@
                 content-type="application/json"
                 handle-as="json"
                 on-response="_refreshGameData"
+                on-error="_logError"
         ></iron-ajax>
 
         <paper-button raised class="custom indigo" on-click="_handleNewGame">
@@ -71,6 +73,10 @@
             ready: function () {
                 console.log("main: ready");
                 this._refreshGameData();
+
+                this.addEventListener('contextmenu', function () {
+                    event.preventDefault();
+                });
             },
 
             listeners: {
@@ -84,7 +90,7 @@
             },
 
             _handleAjaxPost: function (event) {
-                console.log(event);
+                console.log('main: ajax post');
                 event.stopPropagation();
                 this.$.ajaxposter.body = event.detail;
                 this.$.ajaxposter.generateRequest();
@@ -94,6 +100,10 @@
                 this.fire('ajax-post', {
                     action: 'restart'
                 });
+            },
+
+            _logError: function (event) {
+                console.log('main: ajax error');
             }
         });
 
