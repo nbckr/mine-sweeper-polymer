@@ -46,10 +46,11 @@
         <paper-material
                 elevation="1"
                 animated
-                on-tap="_handleTap"
+                on-click="_handleLeftClick"
+                on-contextmenu="_handleRightClick"
                 on-mouseover="_animateMouseover"
                 on-mouseout="_animateMouseout">
-            <span hidden="true">{{cell.surroundingMines}}</span>
+            <span hidden="{{!cell.isRevealed}}">{{cell.surroundingMines}}</span>
         </paper-material>
     </template>
 
@@ -60,7 +61,8 @@
 
             properties: {
                 cell: {
-                    type: Object
+                    type: Object,
+                    notify: true
                 }
             },
 
@@ -69,32 +71,29 @@
             },
 
             _computeClass: function() {
-                console.log("hi")
-                console.log(this.cell)
-                return "blabla surrounding-" + this.cell.surroundingMines;
+                return "surrounding-" + this.cell.surroundingMines;
             },
 
-            _handleTap: function (event) {
-                if (event.detail.sourceEvent.button === 0) {
+            _handleLeftClick: function (event) {
+                console.log('cell: left click');
+
                     this.fire('ajax-post', {
                         action: 'reveal',
                         row: this.cell.position.row,
                         col: this.cell.position.col
                     });
-                }
+            },
 
-                else if (event.detail.sourceEvent.button === 2) {
-                    this.fire('ajax-post', {
-                        action: 'flag',
-                        row: this.cell.position.row,
-                        col: this.cell.position.col
-                    });
-                }
-
+            _handleRightClick: function (event) {
+                console.log('cell: right click');
+                this.fire('ajax-post', {
+                    action: 'flag',
+                    row: this.cell.position.row,
+                    col: this.cell.position.col
+                });
             },
             
             _animateMouseover: function () {
-                console.log('cell-animate');
                 this.$$('paper-material').elevation = 4;
             },
 
