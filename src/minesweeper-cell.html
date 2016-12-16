@@ -1,57 +1,97 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
 <link rel="import" href="../bower_components/paper-material/paper-material.html"/>
+<link rel="import" href="../bower_components/iron-icons/device-icons.html"/>
 
 <dom-module id="minesweeper-cell">
 
-    <style>
+    <style is="custom-style">
+
+        :host {
+            height: auto;
+            display: inline-block;
+            //border: 1px solid red;
+            margin: 3px 0;
+        }
+
         paper-material {
             width: 40px;
             height: 40px;
             display: inline-block;
+            vertical-align: top;
             background: white;
             box-sizing: border-box;
             margin: 2px;
             padding: 6px;
             border-radius: 2px;
             text-align: center;
+            cursor: pointer;
         }
 
-        paper-material.blabla {
-            background-color: yellow;
+        paper-material {
+            background-color: lightgray;
         }
 
-        paper-material.surrounding-0 {
+        paper-material > span,
+        paper-material.isRevealed.hasMine > span {
+            display: none;
+        }
+
+        paper-material.isRevealed > span {
+            display: inline;
+        }
+
+        paper-material iron-icon {
+            display: none;
+        }
+        paper-material.isRevealed.hasMine iron-icon.icon-mine,
+        paper-material.isRevealed.isFlagged iron-icon.icon-flag {
+            display: inline-block;
+        }
+
+        paper-material.surrounding-0.isRevealed {
             background-color: #8bc34a;
         }
-        paper-material.surrounding-1 {
+
+        paper-material.surrounding-1.isRevealed {
             background-color: #ffeb3b;
         }
-        paper-material.surrounding-2 {
+
+        paper-material.surrounding-2.isRevealed {
             background-color: #ffc107;
         }
-        paper-material.surrounding-3,
-        paper-material.surrounding-4,
-        paper-material.surrounding-5,
-        paper-material.surrounding-6,
-        paper-material.surrounding-7,
-        paper-material.surrounding-8 {
+
+        paper-material.surrounding-3.isRevealed,
+        paper-material.surrounding-4.isRevealed,
+        paper-material.surrounding-5.isRevealed,
+        paper-material.surrounding-6.isRevealed,
+        paper-material.surrounding-7.isRevealed,
+        paper-material.surrounding-8.isRevealed {
             background-color: #ea7f3b;
         }
-        paper-material.mine {
+
+        paper-material.hasMine.isRevealed {
             background-color: #c0392b;
         }
+
     </style>
 
     <template>
+
         <paper-material
+                class$="{{_computeClass(cell)}}"
                 elevation="1"
                 animated
                 on-click="_handleLeftClick"
                 on-contextmenu="_handleRightClick"
                 on-mouseover="_animateMouseover"
                 on-mouseout="_animateMouseout">
-            <span hidden="{{!cell.isRevealed}}">{{cell.surroundingMines}}</span>
+
+            <span>{{cell.surroundingMines}}</span>
+            <iron-icon class="icon-mine" icon="device:brightness-high"></iron-icon>
+            <iron-icon class="icon-flag" icon="icons:flag"></iron-icon>
         </paper-material>
+
+
     </template>
 
     <script>
@@ -66,22 +106,40 @@
                 }
             },
 
-            ready: function() {
-                this.$$('paper-material').className += this._computeClass();
+            ready: function () {
+                //this._computeInitialClass();
+
+                document.addEventListener('server-response', function (e) {
+                    console.log(e);
+                })
             },
 
-            _computeClass: function() {
-                return "surrounding-" + this.cell.surroundingMines;
+            _computeClass: function (cell) {
+                var classes = 'surrounding-' + cell.surroundingMines;
+
+                if (cell.isRevealed) {
+                    classes += ' isRevealed';
+                }
+
+                if (cell.hasMine) {
+                    classes += ' hasMine';
+                }
+
+                if (cell.isFlagged) {
+                    classes += ' isFlagged';
+                }
+
+                return classes;
             },
 
             _handleLeftClick: function (event) {
                 console.log('cell: left click');
 
-                    this.fire('ajax-post', {
-                        action: 'reveal',
-                        row: this.cell.position.row,
-                        col: this.cell.position.col
-                    });
+                this.fire('ajax-post', {
+                    action: 'reveal',
+                    row: this.cell.position.row,
+                    col: this.cell.position.col
+                });
             },
 
             _handleRightClick: function (event) {
@@ -92,7 +150,7 @@
                     col: this.cell.position.col
                 });
             },
-            
+
             _animateMouseover: function () {
                 this.$$('paper-material').elevation = 4;
             },

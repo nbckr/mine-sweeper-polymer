@@ -100,6 +100,7 @@
                 this.fire('ajax-post', {
                     action: 'restart'
                 });
+                this.fire('game-restart', {node: this.$$('minesweeper-cell')});
             },
 
             _logError: function (event) {
