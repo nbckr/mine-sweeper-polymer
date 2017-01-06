@@ -3,22 +3,47 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 <dom-module id="minesweeper-login">
+
+    <style>
+        :host {
+            border: 2px solid black;
+            float: right;
+        }
+        paper-button {
+            display: inline-block;
+        }
+        #user-details {
+            border: 3px solid red;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            align-content: center;
+        }
+
+        img {
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+
     <template>
 
         <firebase-auth
                 id="auth"
                 user="{{user}}"
-                status-known="{{statusKnown}}"
                 provider="google">
         </firebase-auth>
 
-        <template is="dom-if" if=[[user]]>
-            <h1>Welcume [[user.displayName]]</h1>
-            <img src$="[[user.photoURL]]" alt="">
-        </template>
-
         <paper-button raised on-tap="_login" hidden$="[[user]]">Sign in</paper-button>
         <paper-button raised on-tap="_logout" hidden$="[[!user]]">Sign out</paper-button>
+
+        <template is="dom-if" if=[[user]]>
+            <div id="user-details">
+                <img src$="[[user.photoURL]]">
+                <p>[[user.displayName]]</p>
+            </div>
+        </template>
 
 
     </template>
