@@ -1,0 +1,24 @@
+<link rel="import" href="../bower_components/polymer/polymer.html"/>
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="minesweeper-login.html">
+
+<dom-module id="minesweeper-auth">
+    <template>
+
+        <firebase-app
+                id="firebase"
+                auth-domain="mine-sweeper-polymer.firebaseapp.com"
+                database-url="https://mine-sweeper-polymer.firebaseio.com/"
+                api-key="AIzaSyAyrbUQ3mDVVOhcANZfCWpDoCC6HZgKyvU">
+        </firebase-app>
+
+        <minesweeper-login></minesweeper-login>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'minesweeper-auth'
+        });
+    </script>
+</dom-module>

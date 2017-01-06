@@ -25,9 +25,11 @@
                 color: white !important;
             };
         }
+
         paper-button.custom:hover {
             background-color: var(--paper-indigo-100);
         }
+
         paper-button.indigo {
             background-color: var(--paper-indigo-500);
             color: white;
@@ -61,7 +63,8 @@
         ></iron-ajax>
 
         <paper-button raised class="custom indigo" on-click="_handleNewGame">
-            <iron-icon icon="add-circle"></iron-icon> Start new game
+            <iron-icon icon="add-circle"></iron-icon>
+            Start new game
         </paper-button>
 
         <minesweeper-grid gamedata="{{gamedata}}"></minesweeper-grid>
@@ -91,29 +94,35 @@
             listeners: {
                 'ajax-post': '_handleAjaxPost',
                 'server-response': '_refreshGameData'
-            },
+            }
+            ,
 
             _refreshGameData: function () {
                 console.log("main: refresh");
                 this.$.ajaxgetter.generateRequest();
-            },
+            }
+            ,
 
             _handleAjaxPost: function (event) {
                 console.log('main: ajax post');
                 event.stopPropagation();
                 this.$.ajaxposter.body = event.detail;
                 this.$.ajaxposter.generateRequest();
-            },
+            }
+            ,
 
             _handleNewGame: function () {
                 console.log(this.$$('#backdrop'));
                 this.$$('#backdrop').open();
 
                 this.fire('ajax-post', {
-                    action: 'restart'
+                    action: 'start',
+                    size: 'small',
+                    difficulty: 'beginner'
                 });
-                this.fire('game-restart', {node: this.$$('minesweeper-cell')});
-            },
+                this.fire('game-start', {node: this.$$('minesweeper-cell')});
+            }
+            ,
 
             _logError: function (event) {
                 console.log('main: ajax error');

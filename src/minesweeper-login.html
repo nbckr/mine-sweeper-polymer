@@ -1,0 +1,53 @@
+<link rel="import" href="../bower_components/polymer/polymer.html"/>
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="minesweeper-login">
+    <template>
+
+        <firebase-auth
+                id="auth"
+                user="{{user}}"
+                status-known="{{statusKnown}}"
+                provider="google">
+        </firebase-auth>
+
+        <template is="dom-if" if=[[user]]>
+            <h1>Welcume [[user.displayName]]</h1>
+            <img src$="[[user.photoURL]]" alt="">
+        </template>
+
+        <paper-button raised on-tap="_login" hidden$="[[user]]">Sign in</paper-button>
+        <paper-button raised on-tap="_logout" hidden$="[[!user]]">Sign out</paper-button>
+
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'minesweeper-login',
+
+            properties: {
+                user: {
+                    type: Object
+                },
+                statusKnown: {
+                    type: Object
+                }
+            },
+
+            _login: function () {
+                return this.$.auth.signInWithPopup()
+                    .then(function (response) { // successful authentication response here
+                        console.log(response);
+                    })
+                    .catch(function (error) {// unsuccessful authentication response here
+                    });
+            },
+
+            _logout: function () {
+                return this.$.auth.signOut();
+            }
+        });
+    </script>
+</dom-module>
