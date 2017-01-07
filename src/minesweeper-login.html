@@ -6,25 +6,46 @@
 
     <style>
         :host {
-            display: inline-flex;
-            justify-content: flex-end;
-            align-items: center;
-            align-content: center;
+            display: flex;
+            align-content: stretch;
+            justify-content: center;
+            -webkit-justify-content: space-between;
             border: 2px solid black;
-            float: right;
+            padding: 10px 0 0 0;
+            //float: right;
         }
+
         :host(.logged-in) {
 
         }
+
+        :host:after {
+            content: ".";
+            clear: both;
+            display: block;
+            //visibility: hidden;
+            height: 0px;
+        }
+
         paper-button {
             display: inline-block;
         }
+
         #user-details {
             border: 3px solid red;
-            display: inline-flex;
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            //align-content: center;
+        }
+
+        #login-button {
+            border: 3px solid green;
+            flex-grow: 1;
+            display: flex;
             justify-content: flex-end;
             align-items: center;
-            align-content: center;
         }
 
         img {
@@ -42,9 +63,6 @@
                 provider="google">
         </firebase-auth>
 
-        <paper-button raised on-tap="_login" hidden$="[[user]]">Sign in</paper-button>
-        <paper-button raised on-tap="_logout" hidden$="[[!user]]">Sign out</paper-button>
-
         <template is="dom-if" if=[[user]]>
             <div id="user-details">
                 <img src$="[[user.photoURL]]">
@@ -52,6 +70,10 @@
             </div>
         </template>
 
+        <div id="login-button">
+            <paper-button raised on-tap="_login" hidden$="[[user]]">Sign in</paper-button>
+            <paper-button raised on-tap="_logout" hidden$="[[!user]]">Sign out</paper-button>
+        </div>
 
     </template>
 
