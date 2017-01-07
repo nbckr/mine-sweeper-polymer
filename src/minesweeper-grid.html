@@ -19,7 +19,7 @@
 
             <div class="row">
                 <template is="dom-repeat" as="cell" items="{{row}}">
-                    <minesweeper-cell cell="{{cell}}"></minesweeper-cell>
+                    <minesweeper-cell cell="{{cell}}" state="{{gamedata.state}}" class="cell"></minesweeper-cell>
                 </template>
             </div>
 
@@ -31,7 +31,19 @@
 
             is: 'minesweeper-grid',
 
-            properties: {}
+            properties: {
+                gamedata: {
+                    type: Object,
+                    notify: true
+                }
+            },
+
+            _handleOpenModal: function () {
+                var cells = Polymer.dom(this.root).querySelectorAll('minesweeper-cell');
+                for (var i = 0, len = cells.length; i < len; i++) {
+                    cells[i]._handleOpenModal();
+                }
+            }
         });
     </script>
 

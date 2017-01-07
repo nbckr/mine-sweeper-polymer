@@ -1,84 +1,91 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
 <link rel="import" href="../bower_components/paper-material/paper-material.html"/>
+<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html"/>
 <link rel="import" href="../bower_components/iron-icons/device-icons.html"/>
 
 <dom-module id="minesweeper-cell">
 
-    <style is="custom-style">
-
-        :host {
-            height: auto;
-            display: inline-block;
-            //border: 1px solid red;
-            margin: 3px 0;
-        }
-
-        paper-material {
-            width: 40px;
-            height: 40px;
-            display: inline-block;
-            vertical-align: top;
-            background: white;
-            box-sizing: border-box;
-            margin: 2px;
-            padding: 6px;
-            border-radius: 2px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        paper-material {
-            background-color: lightgray;
-        }
-
-        paper-material > span,
-        paper-material.isRevealed.hasMine > span {
-            display: none;
-        }
-
-        paper-material.isRevealed > span {
-            display: inline;
-        }
-
-        paper-material iron-icon {
-            display: none;
-        }
-        paper-material.isRevealed.hasMine iron-icon.icon-mine,
-        paper-material.isFlagged iron-icon.icon-flag {
-            display: inline-block;
-        }
-        paper-material.isRevealed.isFlagged iron-icon.icon-flag {
-            display: none;
-        }
-
-        paper-material.surrounding-0.isRevealed {
-            background-color: #8bc34a;
-        }
-
-        paper-material.surrounding-1.isRevealed {
-            background-color: #ffeb3b;
-        }
-
-        paper-material.surrounding-2.isRevealed {
-            background-color: #ffc107;
-        }
-
-        paper-material.surrounding-3.isRevealed,
-        paper-material.surrounding-4.isRevealed,
-        paper-material.surrounding-5.isRevealed,
-        paper-material.surrounding-6.isRevealed,
-        paper-material.surrounding-7.isRevealed,
-        paper-material.surrounding-8.isRevealed {
-            background-color: #ea7f3b;
-        }
-
-        paper-material.hasMine.isRevealed {
-            background-color: #c0392b;
-        }
-
-    </style>
-
     <template>
+
+        <style is="custom-style">
+
+            :host {
+                height: auto;
+                display: inline-block;
+            / / border: 1 px solid red;
+                margin: 3px 0;
+            }
+
+            paper-material {
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+                vertical-align: top;
+                background: white;
+                box-sizing: border-box;
+                margin: 2px;
+                padding: 6px;
+                border-radius: 2px;
+                text-align: center;
+                cursor: pointer;
+            }
+
+            paper-material {
+                background-color: lightgray;
+            }
+
+            paper-material > span,
+            paper-material.isRevealed.hasMine > span {
+                display: none;
+            }
+
+            paper-material.isRevealed > span {
+                display: inline;
+            }
+
+            paper-material iron-icon {
+                display: none;
+            }
+
+            paper-material.isRevealed.hasMine iron-icon.icon-mine,
+            paper-material.isFlagged iron-icon.icon-flag {
+                display: inline-block;
+            }
+
+            paper-material.isRevealed.isFlagged iron-icon.icon-flag {
+                display: none;
+            }
+
+            paper-material.surrounding-0.isRevealed {
+                background-color: #8bc34a;
+            }
+
+            paper-material.surrounding-1.isRevealed {
+                background-color: #ffeb3b;
+            }
+
+            paper-material.surrounding-2.isRevealed {
+                background-color: #ffc107;
+            }
+
+            paper-material.surrounding-3.isRevealed,
+            paper-material.surrounding-4.isRevealed,
+            paper-material.surrounding-5.isRevealed,
+            paper-material.surrounding-6.isRevealed,
+            paper-material.surrounding-7.isRevealed,
+            paper-material.surrounding-8.isRevealed {
+                background-color: #ea7f3b;
+            }
+
+            paper-material.hasMine.isRevealed {
+                background-color: #c0392b;
+                color: white;
+            }
+
+            paper-ripple {
+                color: #c0392b;
+            }
+        </style>
 
         <paper-material
                 class$="{{_computeClass(cell)}}"
@@ -94,6 +101,9 @@
             <iron-icon class="icon-flag" icon="icons:flag"></iron-icon>
         </paper-material>
 
+        <template is="dom-if" if="{{cell.hasMine}}">
+            <paper-ripple hold-down id="ripple"></paper-ripple>
+        </template>
 
     </template>
 
@@ -106,18 +116,19 @@
                 cell: {
                     type: Object,
                     notify: true
+                },
+                state: {
+                    type: String,
+                    notify: true
                 }
             },
 
-            ready: function () {
-                //this._computeInitialClass();
-
-                document.addEventListener('server-response', function (e) {
-                    console.log(e);
-                })
+            listeners: {
+                'state-changed': '_handleStateChanged'
             },
 
             _computeClass: function (cell) {
+
                 var classes = 'surrounding-' + cell.surroundingMines;
 
                 if (cell.isRevealed) {
@@ -136,8 +147,6 @@
             },
 
             _handleLeftClick: function (event) {
-                console.log('cell: left click');
-
                 this.fire('ajax-post', {
                     action: 'reveal',
                     row: this.cell.position.row,
@@ -146,7 +155,6 @@
             },
 
             _handleRightClick: function (event) {
-                console.log('cell: right click');
                 this.fire('ajax-post', {
                     action: 'flag',
                     row: this.cell.position.row,
@@ -160,6 +168,27 @@
 
             _animateMouseout: function () {
                 this.$$('paper-material').elevation = 1;
+            },
+
+            _handleStateChanged: function () {
+                //switch (this.state) {
+                //    case "GAME_LOST":
+                //        if (this.$$('#ripple')) {
+                //            var bodyRect = document.body.getBoundingClientRect(),
+                //                elemRect = this.getBoundingClientRect(),
+                //                offsetX = elemRect.left - bodyRect.left,
+                //                offsetY = elemRect.top - bodyRect.top;
+                //            this.$$('#ripple').holdDown = false;
+                //            this.$$('#ripple').downAction({detail: {x: offsetX, y: offsetY}});
+                //        }
+                //}
+            },
+
+            _handleOpenModal: function () {
+                if (this.$$('#ripple')) {
+                    this.$$('#ripple').holdDown = false;
+                    //this.$$('#ripple').removeRipple();
+                }
             }
         });
     </script>

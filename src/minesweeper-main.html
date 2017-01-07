@@ -62,12 +62,12 @@
                 on-error="_logError"
         ></iron-ajax>
 
-        <paper-button raised class="custom indigo" on-click="_handleNewGame">
+        <paper-button raised class="custom indigo" on-click="_handleOpenModal">
             <iron-icon icon="add-circle"></iron-icon>
             Start new game
         </paper-button>
 
-        <minesweeper-grid gamedata="{{gamedata}}"></minesweeper-grid>
+        <minesweeper-grid gamedata="{{gamedata}}" id="grid"></minesweeper-grid>
 
     </template>
 
@@ -77,7 +77,6 @@
             is: 'minesweeper-main',
 
             ready: function () {
-                console.log("main: ready");
                 this._refreshGameData();
 
                 this.addEventListener('contextmenu', function () {
@@ -92,21 +91,20 @@
             ,
 
             _refreshGameData: function () {
-                console.log("main: refresh");
                 this.$.ajaxgetter.generateRequest();
             }
             ,
 
             _handleAjaxPost: function (event) {
-                console.log('main: ajax post');
                 event.stopPropagation();
                 this.$.ajaxposter.body = event.detail;
                 this.$.ajaxposter.generateRequest();
             }
             ,
 
-            _handleNewGame: function () {
+            _handleOpenModal: function () {
                 this.fire('open-modal');
+                this.$.grid._handleOpenModal();
             }
             ,
 
