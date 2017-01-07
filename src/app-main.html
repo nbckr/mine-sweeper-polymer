@@ -23,6 +23,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="icons.html">
 
+<link rel="import" href="minesweeper-auth.html">
+
 <dom-module id="app-main">
     <template>
         <style>
@@ -92,6 +94,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <div main-title>MineSweeper</div>
                     </app-toolbar>
                 </app-header>
+
+                <minesweeper-auth></minesweeper-auth>
 
                 <iron-pages
                         selected="[[page]]"
