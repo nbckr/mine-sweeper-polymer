@@ -15,28 +15,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 <dom-module id="view-game">
-  <template>
-    <style include="shared-styles">
-      :host {
-        display: block;
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
 
-        padding: 10px;
-      }
-    </style>
+                padding: 10px;
+            }
+        </style>
 
-    <div class="card">
-      <div class="circle">1</div>
+        <div class="card">
+            <div class="circle">1</div>
 
-      <minesweeper-auth></minesweeper-auth>
+            <minesweeper-auth></minesweeper-auth>
 
-      <h1>Hallo!!</h1>
-      <minesweeper-main></minesweeper-main>
-    </div>
-  </template>
+            <h1>Hallo!!</h1>
+            <minesweeper-main id="main"></minesweeper-main>
+        </div>
+    </template>
 
-  <script>
-    Polymer({
-      is: 'view-game'
-    });
-  </script>
+    <script>
+        Polymer({
+            is: 'view-game',
+
+            _handleAjaxPost: function (event) {
+                // came from dialogue, hand down to minesweeper-main
+                this.$.main._handleAjaxPost(event);
+            }
+        });
+    </script>
 </dom-module>

@@ -1,0 +1,192 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   'PolymerElements/paper-dialog' ]
+2 info using npm@3.8.2
+3 info using node@v6.8.1
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData PolymerElements/paper-dialog
+8 silly fetchOtherPackageData PolymerElements/paper-dialog
+9 silly cache add args [ 'PolymerElements/paper-dialog', null ]
+10 verbose cache add spec PolymerElements/paper-dialog
+11 silly cache add parsed spec Result {
+11 silly cache add   raw: 'PolymerElements/paper-dialog',
+11 silly cache add   scope: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: 'PolymerElements/paper-dialog',
+11 silly cache add   spec: 'github:polymerelements/paper-dialog',
+11 silly cache add   type: 'hosted',
+11 silly cache add   hosted:
+11 silly cache add    { type: 'github',
+11 silly cache add      ssh: 'git@github.com:polymerelements/paper-dialog.git',
+11 silly cache add      sshUrl: 'git+ssh://git@github.com/polymerelements/paper-dialog.git',
+11 silly cache add      httpsUrl: 'git+https://github.com/polymerelements/paper-dialog.git',
+11 silly cache add      gitUrl: 'git://github.com/polymerelements/paper-dialog.git',
+11 silly cache add      shortcut: 'github:polymerelements/paper-dialog',
+11 silly cache add      directUrl: 'https://raw.githubusercontent.com/polymerelements/paper-dialog/master/package.json' } }
+12 verbose addRemoteGit caching PolymerElements/paper-dialog
+13 verbose addRemoteGit polymerelements/paper-dialog is a repository hosted by github
+14 silly tryGitProto attempting to clone git://github.com/polymerelements/paper-dialog.git
+15 silly tryClone cloning polymerelements/paper-dialog via git://github.com/polymerelements/paper-dialog.git
+16 verbose tryClone git-github-com-polymerelements-paper-dialog-git-362f1541 not in flight; caching
+17 verbose correctMkdir /Users/nielsb/.npm/_git-remotes correctMkdir not in flight; initializing
+18 info git [ 'clone',
+18 info git   '--template=/Users/nielsb/.npm/_git-remotes/_templates',
+18 info git   '--mirror',
+18 info git   'git://github.com/polymerelements/paper-dialog.git',
+18 info git   '/Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-362f1541' ]
+19 verbose mirrorRemote polymerelements/paper-dialog git clone git://github.com/polymerelements/paper-dialog.git
+20 verbose correctMkdir /Users/nielsb/.npm/_git-remotes correctMkdir not in flight; initializing
+21 verbose setPermissions polymerelements/paper-dialog set permissions on /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-362f1541
+22 verbose resolveHead polymerelements/paper-dialog original treeish: master
+23 info git [ 'rev-list', '-n1', 'master' ]
+24 silly resolveHead polymerelements/paper-dialog resolved treeish: 84ae0a9ddd25a31882c83174d3e00f321b2857e0
+25 verbose resolveHead polymerelements/paper-dialog resolved Git URL: git://github.com/polymerelements/paper-dialog.git#84ae0a9ddd25a31882c83174d3e00f321b2857e0
+26 silly resolveHead Git working directory: /var/folders/36/hs838yts425djm2kyngjcfxmct350d/T/npm-98327-8564b12f/git-cache-29c728f6/84ae0a9ddd25a31882c83174d3e00f321b2857e0
+27 info git [ 'clone',
+27 info git   '/Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-362f1541',
+27 info git   '/var/folders/36/hs838yts425djm2kyngjcfxmct350d/T/npm-98327-8564b12f/git-cache-29c728f6/84ae0a9ddd25a31882c83174d3e00f321b2857e0' ]
+28 verbose cloneResolved polymerelements/paper-dialog clone Cloning into '/var/folders/36/hs838yts425djm2kyngjcfxmct350d/T/npm-98327-8564b12f/git-cache-29c728f6/84ae0a9ddd25a31882c83174d3e00f321b2857e0'...
+28 verbose cloneResolved done.
+29 info git [ 'checkout', '84ae0a9ddd25a31882c83174d3e00f321b2857e0' ]
+30 verbose checkoutTreeish polymerelements/paper-dialog checkout Note: checking out '84ae0a9ddd25a31882c83174d3e00f321b2857e0'.
+30 verbose checkoutTreeish
+30 verbose checkoutTreeish You are in 'detached HEAD' state. You can look around, make experimental
+30 verbose checkoutTreeish changes and commit them, and you can discard any commits you make in this
+30 verbose checkoutTreeish state without impacting any branches by performing another checkout.
+30 verbose checkoutTreeish
+30 verbose checkoutTreeish If you want to create a new branch to retain commits you create, you may
+30 verbose checkoutTreeish do so (now or later) by using -b with the checkout command again. Example:
+30 verbose checkoutTreeish
+30 verbose checkoutTreeish   git checkout -b <new-branch-name>
+30 verbose checkoutTreeish
+30 verbose checkoutTreeish HEAD is now at 84ae0a9... Update travis config
+31 info git [ 'submodule', '-q', 'update', '--init', '--recursive' ]
+32 verbose updateSubmodules polymerelements/paper-dialog submodule update
+33 error addLocal Could not install /var/folders/36/hs838yts425djm2kyngjcfxmct350d/T/npm-98327-8564b12f/git-cache-29c728f6/84ae0a9ddd25a31882c83174d3e00f321b2857e0
+34 silly tryHTTPS attempting to clone git+https://github.com/polymerelements/paper-dialog.git
+35 silly tryClone cloning polymerelements/paper-dialog via git+https://github.com/polymerelements/paper-dialog.git
+36 verbose tryClone git-https-github-com-polymerelements-paper-dialog-git-7b13d732 not in flight; caching
+37 verbose correctMkdir /Users/nielsb/.npm/_git-remotes correctMkdir not in flight; initializing
+38 info git [ 'clone',
+38 info git   '--template=/Users/nielsb/.npm/_git-remotes/_templates',
+38 info git   '--mirror',
+38 info git   'https://github.com/polymerelements/paper-dialog.git',
+38 info git   '/Users/nielsb/.npm/_git-remotes/git-https-github-com-polymerelements-paper-dialog-git-7b13d732' ]
+39 verbose mirrorRemote polymerelements/paper-dialog git clone https://github.com/polymerelements/paper-dialog.git
+40 verbose correctMkdir /Users/nielsb/.npm/_git-remotes correctMkdir not in flight; initializing
+41 verbose setPermissions polymerelements/paper-dialog set permissions on /Users/nielsb/.npm/_git-remotes/git-https-github-com-polymerelements-paper-dialog-git-7b13d732
+42 verbose resolveHead polymerelements/paper-dialog original treeish: master
+43 info git [ 'rev-list', '-n1', 'master' ]
+44 silly resolveHead polymerelements/paper-dialog resolved treeish: 84ae0a9ddd25a31882c83174d3e00f321b2857e0
+45 verbose resolveHead polymerelements/paper-dialog resolved Git URL: git+https://github.com/polymerelements/paper-dialog.git#84ae0a9ddd25a31882c83174d3e00f321b2857e0
+46 silly resolveHead Git working directory: /var/folders/36/hs838yts425djm2kyngjcfxmct350d/T/npm-98327-8564b12f/git-cache-e001e14e/84ae0a9ddd25a31882c83174d3e00f321b2857e0
+47 info git [ 'clone',
+47 info git   '/Users/nielsb/.npm/_git-remotes/git-https-github-com-polymerelements-paper-dialog-git-7b13d732',
+47 info git   '/var/folders/36/hs838yts425djm2kyngjcfxmct350d/T/npm-98327-8564b12f/git-cache-e001e14e/84ae0a9ddd25a31882c83174d3e00f321b2857e0' ]
+48 verbose cloneResolved polymerelements/paper-dialog clone Cloning into '/var/folders/36/hs838yts425djm2kyngjcfxmct350d/T/npm-98327-8564b12f/git-cache-e001e14e/84ae0a9ddd25a31882c83174d3e00f321b2857e0'...
+48 verbose cloneResolved done.
+49 info git [ 'checkout', '84ae0a9ddd25a31882c83174d3e00f321b2857e0' ]
+50 verbose checkoutTreeish polymerelements/paper-dialog checkout Note: checking out '84ae0a9ddd25a31882c83174d3e00f321b2857e0'.
+50 verbose checkoutTreeish
+50 verbose checkoutTreeish You are in 'detached HEAD' state. You can look around, make experimental
+50 verbose checkoutTreeish changes and commit them, and you can discard any commits you make in this
+50 verbose checkoutTreeish state without impacting any branches by performing another checkout.
+50 verbose checkoutTreeish
+50 verbose checkoutTreeish If you want to create a new branch to retain commits you create, you may
+50 verbose checkoutTreeish do so (now or later) by using -b with the checkout command again. Example:
+50 verbose checkoutTreeish
+50 verbose checkoutTreeish   git checkout -b <new-branch-name>
+50 verbose checkoutTreeish
+50 verbose checkoutTreeish HEAD is now at 84ae0a9... Update travis config
+51 info git [ 'submodule', '-q', 'update', '--init', '--recursive' ]
+52 verbose updateSubmodules polymerelements/paper-dialog submodule update
+53 error addLocal Could not install /var/folders/36/hs838yts425djm2kyngjcfxmct350d/T/npm-98327-8564b12f/git-cache-e001e14e/84ae0a9ddd25a31882c83174d3e00f321b2857e0
+54 silly trySSH attempting to clone git@github.com:polymerelements/paper-dialog.git
+55 silly tryClone cloning polymerelements/paper-dialog via git@github.com:polymerelements/paper-dialog.git
+56 verbose tryClone git-github-com-polymerelements-paper-dialog-git-0d564666 not in flight; caching
+57 verbose correctMkdir /Users/nielsb/.npm/_git-remotes correctMkdir not in flight; initializing
+58 info git [ 'clone',
+58 info git   '--template=/Users/nielsb/.npm/_git-remotes/_templates',
+58 info git   '--mirror',
+58 info git   'git@github.com:polymerelements/paper-dialog.git',
+58 info git   '/Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666' ]
+59 error git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666: Cloning into bare repository '/Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666'...
+59 error git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666: Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+59 error git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666: Permission denied (publickey).
+59 error git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666: fatal: Could not read from remote repository.
+59 error git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666:
+59 error git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666: Please make sure you have the correct access rights
+59 error git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666: and the repository exists.
+60 silly fetchPackageMetaData Error: Command failed: git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666
+60 silly fetchPackageMetaData Cloning into bare repository '/Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666'...
+60 silly fetchPackageMetaData Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+60 silly fetchPackageMetaData Permission denied (publickey).
+60 silly fetchPackageMetaData fatal: Could not read from remote repository.
+60 silly fetchPackageMetaData
+60 silly fetchPackageMetaData Please make sure you have the correct access rights
+60 silly fetchPackageMetaData and the repository exists.
+60 silly fetchPackageMetaData
+60 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:206:12)
+60 silly fetchPackageMetaData     at emitTwo (events.js:106:13)
+60 silly fetchPackageMetaData     at ChildProcess.emit (events.js:191:7)
+60 silly fetchPackageMetaData     at maybeClose (internal/child_process.js:877:16)
+60 silly fetchPackageMetaData     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+60 silly fetchPackageMetaData  error for PolymerElements/paper-dialog { Error: Command failed: git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666
+60 silly fetchPackageMetaData Cloning into bare repository '/Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666'...
+60 silly fetchPackageMetaData Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+60 silly fetchPackageMetaData Permission denied (publickey).
+60 silly fetchPackageMetaData fatal: Could not read from remote repository.
+60 silly fetchPackageMetaData
+60 silly fetchPackageMetaData Please make sure you have the correct access rights
+60 silly fetchPackageMetaData and the repository exists.
+60 silly fetchPackageMetaData
+60 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:206:12)
+60 silly fetchPackageMetaData     at emitTwo (events.js:106:13)
+60 silly fetchPackageMetaData     at ChildProcess.emit (events.js:191:7)
+60 silly fetchPackageMetaData     at maybeClose (internal/child_process.js:877:16)
+60 silly fetchPackageMetaData     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+60 silly fetchPackageMetaData   killed: false,
+60 silly fetchPackageMetaData   code: 128,
+60 silly fetchPackageMetaData   signal: null,
+60 silly fetchPackageMetaData   cmd: 'git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666' }
+61 silly rollbackFailedOptional Starting
+62 silly rollbackFailedOptional Finishing
+63 silly runTopLevelLifecycles Starting
+64 silly runTopLevelLifecycles Finishing
+65 silly install printInstalled
+66 verbose stack Error: Command failed: git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666
+66 verbose stack Cloning into bare repository '/Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666'...
+66 verbose stack Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+66 verbose stack Permission denied (publickey).
+66 verbose stack fatal: Could not read from remote repository.
+66 verbose stack
+66 verbose stack Please make sure you have the correct access rights
+66 verbose stack and the repository exists.
+66 verbose stack
+66 verbose stack     at ChildProcess.exithandler (child_process.js:206:12)
+66 verbose stack     at emitTwo (events.js:106:13)
+66 verbose stack     at ChildProcess.emit (events.js:191:7)
+66 verbose stack     at maybeClose (internal/child_process.js:877:16)
+66 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+67 verbose cwd /Users/nielsb/Projects/ain/mine-sweeper-polymer
+68 error Darwin 15.0.0
+69 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "--save" "PolymerElements/paper-dialog"
+70 error node v6.8.1
+71 error npm  v3.8.2
+72 error code 128
+73 error Command failed: git clone --template=/Users/nielsb/.npm/_git-remotes/_templates --mirror git@github.com:polymerelements/paper-dialog.git /Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666
+73 error Cloning into bare repository '/Users/nielsb/.npm/_git-remotes/git-github-com-polymerelements-paper-dialog-git-0d564666'...
+73 error Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+73 error Permission denied (publickey).
+73 error fatal: Could not read from remote repository.
+73 error
+73 error Please make sure you have the correct access rights
+73 error and the repository exists.
+74 error If you need help, you may report this error at:
+74 error     <https://github.com/npm/npm/issues>
+75 verbose exit [ 1, true ]

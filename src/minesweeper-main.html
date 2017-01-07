@@ -44,7 +44,7 @@
 
         <iron-ajax
                 id="ajaxgetter"
-                url="http://localhost:9000/game/json"
+                url="http://localhost:9000/api/json"
                 method="GET"
                 content-type="application/json"
                 handle-as="json"
@@ -54,7 +54,7 @@
 
         <iron-ajax
                 id="ajaxposter"
-                url="http://localhost:9000/game/json"
+                url="http://localhost:9000/api/json"
                 method="POST"
                 content-type="application/json"
                 handle-as="json"
@@ -68,12 +68,6 @@
         </paper-button>
 
         <minesweeper-grid gamedata="{{gamedata}}"></minesweeper-grid>
-
-        <minesweeper-dialogue id="backdrop" with-backdrop always-on-top>
-            <p>Hello world!</p>
-            <button>Button</button>
-            <button onclick="backdrop.close()">Close</button>
-        </minesweeper-dialogue>
 
     </template>
 
@@ -112,15 +106,7 @@
             ,
 
             _handleNewGame: function () {
-                console.log(this.$$('#backdrop'));
-                this.$$('#backdrop').open();
-
-                this.fire('ajax-post', {
-                    action: 'start',
-                    size: 'small',
-                    difficulty: 'beginner'
-                });
-                this.fire('game-start', {node: this.$$('minesweeper-cell')});
+                this.fire('open-modal');
             }
             ,
 

@@ -6,8 +6,15 @@
 
     <style>
         :host {
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            align-content: center;
             border: 2px solid black;
             float: right;
+        }
+        :host(.logged-in) {
+
         }
         paper-button {
             display: inline-block;
