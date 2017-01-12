@@ -113,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </app-header-layout>
         </app-drawer-layout>
 
-        <minesweeper-dialogue id="new-game-dialogue" with-backdrop always-on-top on-ajax-post="_handleAjaxPost"></minesweeper-dialogue>
+        <minesweeper-dialogue id="new-game-dialogue" with-backdrop always-on-top on-websocket-send="_handleWebSocketSend"></minesweeper-dialogue>
 
     </template>
 
@@ -155,9 +155,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 this.$$('#new-game-dialogue').open();
             },
 
-            _handleAjaxPost: function (event) {
+            _handleWebSocketSend: function (event) {
                 // came from dialogue, hand down to minesweeper-main
-                this.$$('#view-game')._handleAjaxPost(event);
+                this.$$('#view-game')._handleWebSocketSend(event);
             }
 
         });

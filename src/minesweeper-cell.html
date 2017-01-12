@@ -102,7 +102,7 @@
         </paper-material>
 
         <template is="dom-if" if="{{cell.hasMine}}">
-            <paper-ripple hold-down id="ripple"></paper-ripple>
+            <paper-ripple id="ripple"></paper-ripple>
         </template>
 
     </template>
@@ -147,7 +147,7 @@
             },
 
             _handleLeftClick: function (event) {
-                this.fire('ajax-post', {
+                this.fire('socket-send', {
                     action: 'reveal',
                     row: this.cell.position.row,
                     col: this.cell.position.col
@@ -155,7 +155,7 @@
             },
 
             _handleRightClick: function (event) {
-                this.fire('ajax-post', {
+                this.fire('socket-send', {
                     action: 'flag',
                     row: this.cell.position.row,
                     col: this.cell.position.col
@@ -186,7 +186,7 @@
 
             _handleOpenModal: function () {
                 if (this.$$('#ripple')) {
-                    this.$$('#ripple').holdDown = false;
+                    //this.$$('#ripple').holdDown = false;
                     //this.$$('#ripple').removeRipple();
                 }
             }

@@ -1,5 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="../bower_components/web-socket/web-socket.html"/>
 <link rel="import" href="../bower_components/paper-button/paper-button.html"/>
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html"/>
 <link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html"/>
@@ -44,25 +44,11 @@
 
     <template>
 
-        <iron-ajax
-                id="ajaxgetter"
-                url="http://localhost:9000/api/json"
-                method="GET"
-                content-type="application/json"
-                handle-as="json"
-                last-response="{{gamedata}}"
-                on-error="_logError"
-        ></iron-ajax>
-
-        <iron-ajax
-                id="ajaxposter"
-                url="http://localhost:9000/api/json"
-                method="POST"
-                content-type="application/json"
-                handle-as="json"
-                on-response="_refreshGameData"
-                on-error="_logError"
-        ></iron-ajax>
+        <web-socket id="socket" url="ws://localhost:9000/socket"
+                    auto json
+                    on-open="_onWebSocketOpen"
+                    on-message="_onWebSocketMessage"
+                    on-error="_logWebSocketError"></web-socket>
 
         <paper-button raised class="custom indigo" on-click="_handleOpenModal">
             <iron-icon icon="add-circle"></iron-icon>
@@ -78,29 +64,40 @@
 
             is: 'minesweeper-main',
 
-            ready: function () {
-                this._refreshGameData();
+            properties: {
+                gamedata: {
+                    type: Object,
+                    notify: true
+                }
+            },
 
+            ready: function () {
+                // Prevent context menu
                 this.addEventListener('contextmenu', function () {
                     event.preventDefault();
                 });
             },
 
             listeners: {
-                'ajax-post': '_handleAjaxPost',
-                'server-response': '_refreshGameData'
+                'socket-send': '_sendToWebSocket'
             }
             ,
 
-            _refreshGameData: function () {
-                this.$.ajaxgetter.generateRequest();
-            }
-            ,
+            _onWebSocketOpen: function (event) {
+                this.$.socket.send({action: 'touch'});
+            },
 
-            _handleAjaxPost: function (event) {
+            _onWebSocketMessage: function (event) {
+                this.gamedata = event.detail;
+            },
+
+            _logWebSocketError: function (event) {
+                console.log('WS Error: ' + event.detail);
+            },
+
+            _sendToWebSocket: function (event) {
                 event.stopPropagation();
-                this.$.ajaxposter.body = event.detail;
-                this.$.ajaxposter.generateRequest();
+                this.$.socket.send(event.detail);
             }
             ,
 
@@ -108,11 +105,7 @@
                 this.fire('open-modal');
                 this.$.grid._handleOpenModal();
             }
-            ,
 
-            _logError: function (event) {
-                console.log('main: ajax error');
-            }
         });
 
     </script>

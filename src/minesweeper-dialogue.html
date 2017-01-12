@@ -8,9 +8,9 @@
     <template>
         <style>
             :host {
-                //display: flex;
-                //justify-content: center;
-                //align-items: flex-start;
+            / / display: flex;
+            / / justify-content: center;
+            / / align-items: flex-start;
 
                 background: white;
                 color: black;
@@ -83,8 +83,10 @@
             </paper-radio-group>
         </form>
 
-        <paper-button dialog-confirm autofocus on-click="close" raised class="custom indigo">Actually, no.</paper-button>
-        <paper-button dialog-confirm on-click="_handleStartButton" raised class="custom indigo">Oh boy, let's go!</paper-button>
+        <paper-button dialog-confirm autofocus on-click="close" raised class="custom indigo">Actually, no.
+        </paper-button>
+        <paper-button dialog-confirm on-click="_handleStartButton" raised class="custom indigo">Oh boy, let's go!
+        </paper-button>
 
     </template>
 
@@ -93,14 +95,17 @@
 <script>
     (function () {
         Polymer({
+
             is: 'minesweeper-dialogue',
+
             behaviors: [
                 Polymer.IronOverlayBehavior
             ],
+
             _handleStartButton: function () {
-                var size =this.$.size.selected;
+                var size = this.$.size.selected;
                 var difficulty = this.$.difficulty.selected;
-                this.fire('ajax-post', {
+                this.fire('websocket-send', {
                     action: 'start',
                     size: size,
                     difficulty: difficulty

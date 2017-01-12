@@ -32,9 +32,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         Polymer({
             is: 'view-game',
 
-            _handleAjaxPost: function (event) {
+            _handleWebSocketSend: function (event) {
                 // came from dialogue, hand down to minesweeper-main
-                this.$.main._handleAjaxPost(event);
+                this.$.main._sendToWebSocket(event);
             }
         });
     </script>
