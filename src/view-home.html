@@ -1,0 +1,45 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="view-home">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }
+            img {
+                width: 11em;
+                display: block;
+                margin: auto;
+            }
+        </style>
+
+        <div class="card">
+
+            <img src="/images/poison.svg">
+
+            <h1>Wanna play a game?</h1>
+            <p>Just you and an array of squares right in front of you. Some of them conceal mines, some don't. Touch the
+                wrong one: Instant Death.</p>
+            <p>That's pretty much it. Sounds fun? Let's jump right in.</p>
+            <small>(Don't say we didn't warn you)</small>
+
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'view-home'
+        });
+    </script>
+</dom-module>
