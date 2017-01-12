@@ -1,0 +1,93 @@
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/iron-swipeable-container/iron-swipeable-container.html">
+
+<dom-module id="minesweeper-message">
+
+    <style>
+        paper-card {
+            box-sizing: border-box;
+            width: 100%;
+            margin: 4px;
+        }
+
+        paper-card img {
+            width: 5em;
+            display: block;
+            margin: 7px auto 0 auto;
+        }
+
+        #gameover-card, #gameover-card a {
+            color: white !important;
+            --paper-card-background-color: #c0392b;
+            --paper-card-header-color: #fff;
+        }
+
+        #gamewon-card, #gamewon-card a {
+            color: black !important;
+            --paper-card-background-color: #8BC34A;
+        }
+
+        iron-swipeable-container {
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: default;
+        }
+    </style>
+
+    <template>
+
+        <!-- TODO: Currently swipe removes the div forever -->
+        <iron-swipeable-container on-iron-swipe="_onSwipe">
+        <template is="dom-if" if="{{_stateEquals(gamedata, 'GAME_LOST')}}">
+            <paper-card heading="Whooops. You're dead." id="gameover-card">
+                <div class="card-actions">
+                    <img src="/images/tombstone-white.svg">
+                    <p>Hate to say we told you so. <a href="#" on-click="_handleOpenModal">Don't cry, try again.</a></p>
+                </div>
+            </paper-card>
+        </template>
+
+        <template is="dom-if" if="{{_stateEquals(gamedata, 'GAME_WON')}}">
+            <paper-card heading="You won and it was really awesome!" id="gamewon-card">
+                <div class="card-actions">
+                    <img src="/images/medal.svg">
+                    <p>We always knew you could do it. Huge success. Tremendous. <a href="#"
+                                                                                    on-click="_handleOpenModal">
+                        Okay enough of it now, play again.</a></p>
+                </div>
+            </paper-card>
+        </template>
+        </iron-swipeable-container>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'minesweeper-message',
+
+            properties: {
+                gamedata: {
+                    type: Object,
+                    notify: true
+                }
+            },
+
+            // need to pass our own status to trigger recomputation
+            _stateEquals: function (reference, other) {
+                return this.gamedata.state === other;
+            },
+
+            _onSwipe: function (e) {
+                console.log("swipe");
+                console.log(e);
+            },
+
+            _handleOpenModal: function () {
+                this.fire('open-modal');
+            }
+        });
+    </script>
+
+</dom-module>
