@@ -81,6 +81,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <app-drawer>
                 <app-toolbar>Menu</app-toolbar>
                 <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                    <a name="view-home" href="/view-home">Home</a>
                     <a name="view-game" href="/view-game">Game</a>
                     <a name="view-instructions" href="/view-instructions">Instructions</a>
                     <a name="view-about" href="/view-about">About us</a>
@@ -93,7 +94,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <app-header condenses reveals effects="waterfall">
                     <app-toolbar>
                         <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-                        <div main-title>MineSweeper</div>
+                        <div main-title>PolyMineSweeper</div>
                     </app-toolbar>
                 </app-header>
 
@@ -105,6 +106,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         attr-for-selected="name"
                         fallback-selection="view-404"
                         role="main">
+                    <view-home name="view-home" id="view-home"></view-home>
                     <view-game name="view-game" id="view-game"></view-game>
                     <view-instructions name="view-instructions"></view-instructions>
                     <view-about name="view-about"></view-about>
@@ -138,7 +140,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             },
 
             _routePageChanged: function (page) {
-                this.page = page || 'view-game';
+                this.page = page || 'view-home';
             },
 
             _pageChanged: function (page) {

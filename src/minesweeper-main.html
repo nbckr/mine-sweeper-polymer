@@ -4,10 +4,12 @@
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html"/>
 <link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html"/>
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
 
 
 <link rel="import" href="minesweeper-grid.html"/>
 <link rel="import" href="minesweeper-dialogue.html"/>
+<link rel="import" href="minesweeper-message.html"/>
 
 <dom-module id="minesweeper-main">
 
@@ -57,6 +59,8 @@
             Start new game
         </paper-button>
 
+        <minesweeper-message gamedata="{{gamedata}}"></minesweeper-message>
+
         <minesweeper-grid gamedata="{{gamedata}}" id="grid"></minesweeper-grid>
 
     </template>
@@ -69,6 +73,10 @@
             properties: {
                 gamedata: {
                     type: Object,
+                    notify: true
+                },
+                state: {
+                    type: String,
                     notify: true
                 }
             },
@@ -91,6 +99,7 @@
 
             _onWebSocketMessage: function (event) {
                 this.gamedata = event.detail;
+                this.state = event.detail.state;
             },
 
             _logWebSocketError: function (event) {
@@ -103,9 +112,15 @@
             }
             ,
 
-            _handleOpenModal: function () {
+            // Don't use this for catching event that propagates from <minesweeper-message>, just fire from button
+            _handleOpenModal: function (e) {
                 this.fire('open-modal');
-                this.$.grid._handleOpenModal();
+                // TODO this was just a fix for ripple animation: this.$.grid._handleOpenModal();
+            },
+
+            _gameOver: function () {
+                console.log("COMPUTE>>>>>")
+                return this.gamedata && this.gamedata.state == 'GAME_LOST';
             }
 
         });

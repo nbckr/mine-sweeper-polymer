@@ -123,10 +123,6 @@
                 }
             },
 
-            listeners: {
-                'state-changed': '_handleStateChanged'
-            },
-
             _computeClass: function (cell) {
 
                 var classes = 'surrounding-' + cell.surroundingMines;
@@ -168,20 +164,6 @@
 
             _animateMouseout: function () {
                 this.$$('paper-material').elevation = 1;
-            },
-
-            _handleStateChanged: function () {
-                //switch (this.state) {
-                //    case "GAME_LOST":
-                //        if (this.$$('#ripple')) {
-                //            var bodyRect = document.body.getBoundingClientRect(),
-                //                elemRect = this.getBoundingClientRect(),
-                //                offsetX = elemRect.left - bodyRect.left,
-                //                offsetY = elemRect.top - bodyRect.top;
-                //            this.$$('#ripple').holdDown = false;
-                //            this.$$('#ripple').downAction({detail: {x: offsetX, y: offsetY}});
-                //        }
-                //}
             },
 
             _handleOpenModal: function () {
