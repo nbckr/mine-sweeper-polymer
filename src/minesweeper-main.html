@@ -17,44 +17,29 @@
         iron-icon {
             margin-right: 5px;
         }
-
-        paper-button.custom {
-            --paper-button-ink-color: var(--paper-pink-a200);
-            --paper-button-flat-keyboard-focus: {
-                background-color: var(--paper-pink-a200);
-                color: white !important;
-            };
-            --paper-button-raised-keyboard-focus: {
-                background-color: var(--paper-pink-a200) !important;
-                color: white !important;
-            };
-            margin-bottom: 30px;
-        }
-
         paper-button.custom:hover {
-            background-color: var(--paper-indigo-100);
+            background-color: var(--app-third-color);
         }
-
-        paper-button.indigo {
-            background-color: var(--paper-indigo-500);
+        paper-button.custom {
+            background-color: var(--app-primary-color);
             color: white;
             --paper-button-raised-keyboard-focus: {
-                background-color: var(--paper-pink-a200) !important;
+                background-color: var(--app-third-color) !important;
                 color: white !important;
             };
         }
-
     </style>
 
     <template>
 
-        <web-socket id="socket" url="wss://minesweeper-htwg.herokuapp.com/socket"
+        <!-- production: url="wss://minesweeper-htwg.herokuapp.com/socket" -->
+        <web-socket id="socket" url="ws://localhost:9000/socket"
                     auto json
                     on-open="_onWebSocketOpen"
                     on-message="_onWebSocketMessage"
                     on-error="_logWebSocketError"></web-socket>
 
-        <paper-button raised class="custom indigo" on-click="_handleOpenModal">
+        <paper-button raised class="custom" on-click="_handleOpenModal">
             <iron-icon icon="add-circle"></iron-icon>
             Start new game
         </paper-button>

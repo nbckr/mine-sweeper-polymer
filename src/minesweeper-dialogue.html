@@ -31,6 +31,17 @@
                 text-align: center;
                 margin: 3px
             }
+            paper-button.custom:hover {
+                background-color: var(--app-third-color);
+            }
+            paper-button.custom {
+                background-color: var(--app-primary-color);
+                color: white;
+                --paper-button-raised-keyboard-focus: {
+                    background-color: #ea7f3b !important;
+                    color: white !important;
+                };
+            }
         </style>
 
         <form>
@@ -83,9 +94,9 @@
             </paper-radio-group>
         </form>
 
-        <paper-button dialog-confirm autofocus on-click="close" raised class="custom indigo">Actually, no.
+        <paper-button dialog-confirm autofocus on-click="close" raised class="custom">Actually, no.
         </paper-button>
-        <paper-button dialog-confirm on-click="_handleStartButton" raised class="custom indigo">Oh boy, let's go!
+        <paper-button dialog-confirm on-click="_handleStartButton" raised class="custom">Oh boy, let's go!
         </paper-button>
 
     </template>

@@ -53,6 +53,11 @@
             border-radius: 50%;
             margin-right: 10px;
         }
+        paper-button.custom:focus, paper-button.custom:hover {
+            background-color: var(--app-primary-color);
+            color: white;
+
+        }
     </style>
 
     <template>
@@ -71,8 +76,8 @@
         </template>
 
         <div id="login-button">
-            <paper-button raised on-tap="_login" hidden$="[[user]]">Sign in</paper-button>
-            <paper-button raised on-tap="_logout" hidden$="[[!user]]">Sign out</paper-button>
+            <paper-button raised class="custom" on-tap="_login" hidden$="[[user]]">Sign in</paper-button>
+            <paper-button raised class="custom" on-tap="_logout" hidden$="[[!user]]">Sign out</paper-button>
         </div>
 
     </template>
