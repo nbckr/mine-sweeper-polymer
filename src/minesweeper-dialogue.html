@@ -91,7 +91,7 @@
                 <template is="dom-if" if="{{ !largeDevice }}">
                     <iron-swipeable-container>
                         <paper-card heading="Well hello there, little one.">
-                            <div class="card-actions">
+                            <div class="card-content">
                                 If you play this game on the desktop you can choose three different sizes.
                             </div>
                         </paper-card>
@@ -123,9 +123,9 @@
                 </paper-radio-group>
             </form>
 
-            <paper-button dialog-confirm autofocus on-click="close" raised class="custom">Actually, no.
+            <paper-button dialog-confirm autofocus on-click="close" raised class="custom">Hell no!
             </paper-button>
-            <paper-button dialog-confirm on-click="_handleStartButton" raised class="custom">Oh boy, let's go!
+            <paper-button dialog-confirm on-click="_handleStartButton" raised class="custom">Aww yeah!
             </paper-button>
 
         </div>
@@ -144,7 +144,10 @@
             ],
 
             _handleStartButton: function () {
-                var size = this.$.size.selected;
+                // On small devices, size option template is not rendered
+                var size = this.$$('#size')
+                    ? this.$$('#size').selected
+                    : 'small';
                 var difficulty = this.$.difficulty.selected;
                 this.fire('websocket-send', {
                     action: 'start',
