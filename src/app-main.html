@@ -100,7 +100,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </app-header>
 
                 <minesweeper-auth></minesweeper-auth>
-                <minesweeper-login></minesweeper-login>
+                <minesweeper-login on-new-login="_handleLogin" on-logout="_handleLogout"></minesweeper-login>
 
                 <iron-pages
                         selected="[[page]]"
@@ -108,7 +108,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         fallback-selection="view-404"
                         role="main">
                     <view-home name="view-home" id="view-home"></view-home>
-                    <view-game name="view-game" id="view-game"></view-game>
+                    <view-game name="view-game" id="view-game" username="{{ username }}"></view-game>
                     <view-instructions name="view-instructions"></view-instructions>
                     <view-about name="view-about"></view-about>
                     <view-404 name="view-404"></view-404>
@@ -129,6 +129,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     type: String,
                     reflectToAttribute: true,
                     observer: '_pageChanged'
+                },
+                username : {
+                    type: String,
+                    value: 'Stranger',
+                    notify: true
                 }
             },
 
@@ -161,6 +166,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             _handleWebSocketSend: function (event) {
                 // came from dialogue, hand down to minesweeper-main
                 this.$$('#view-game')._handleWebSocketSend(event);
+            },
+
+            _handleLogin: function (event) {
+                console.log(event.detail)
+                this.username = event.detail;
+            },
+
+            _handleLogout: function () {
+                this.username = 'Stranger'
             }
 
         });

@@ -25,13 +25,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </style>
 
         <div class="card">
-            <minesweeper-main id="main"></minesweeper-main>
+            <minesweeper-main id="main" username="{{username}}"></minesweeper-main>
         </div>
     </template>
 
     <script>
         Polymer({
             is: 'view-game',
+
+            properties: {
+                user: {
+                    type: Object
+                }
+            },
 
             _handleWebSocketSend: function (event) {
                 // came from dialogue, hand down to minesweeper-main

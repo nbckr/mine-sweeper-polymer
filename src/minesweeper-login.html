@@ -85,7 +85,9 @@
 
             properties: {
                 user: {
-                    type: Object
+                    type: Object,
+                    notify: true,
+                    observer: '_userChanged'
                 },
                 statusKnown: {
                     type: Object
@@ -95,7 +97,6 @@
             _login: function () {
                 return this.$.auth.signInWithPopup()
                     .then(function (response) { // successful authentication response here
-                        console.log(response);
                     })
                     .catch(function (error) {// unsuccessful authentication response here
                     });
@@ -103,6 +104,11 @@
 
             _logout: function () {
                 return this.$.auth.signOut();
+            },
+
+            _userChanged: function () {
+                if (this.user) this.fire('new-login', this.user.displayName);
+                else this.fire('logout');
             }
         });
     </script>

@@ -44,6 +44,8 @@
             Start new game
         </paper-button>
 
+        <p>Hello, {{username}}. Feeling adventurous today?</p>
+
         <minesweeper-message gamedata="{{gamedata}}"></minesweeper-message>
 
         <minesweeper-grid gamedata="{{gamedata}}" id="grid"></minesweeper-grid>
@@ -63,6 +65,9 @@
                 state: {
                     type: String,
                     notify: true
+                },
+                username : {
+                    type: String
                 }
             },
 
