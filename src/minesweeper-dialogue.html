@@ -3,6 +3,9 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html"/>
 <link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html"/>
 <link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html"/>
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html"/>
+<link rel="import" href="../bower_components/iron-swipeable-container/iron-swipeable-container.html"/>
+<link rel="import" href="../bower_components/paper-card/paper-card.html"/>
 
 <dom-module id="minesweeper-dialogue">
     <template>
@@ -47,33 +50,53 @@
                     color: white !important;
                 };
             }
+
+            paper-card {
+                --paper-card-background-color: #ddd;
+                margin: 1em .5em;
+                user-select: none;
+            }
         </style>
+
+        <iron-media-query query="(min-width: 641px)" query-matches="{{largeDevice}}"></iron-media-query>
 
         <div>
             <form>
-                <h3>Choose grid size</h3>
-                <p>How'd you like your grid today? Feeling like a giant?</p>
 
-                <paper-radio-group selected="small" id="size">
-                    <paper-radio-button name="small">
-                        <div>
-                            <img src="/images/small.svg" alt="small">
-                            <small>Small</small>
-                        </div>
-                    </paper-radio-button>
-                    <paper-radio-button name="medium">
-                        <div>
-                            <img src="/images/medium.svg" alt="medium">
-                            <small>Medium</small>
-                        </div>
-                    </paper-radio-button>
-                    <paper-radio-button name="large">
-                        <div>
-                            <img src="/images/large.svg" alt="large">
-                            <small>Large</small>
-                        </div>
-                    </paper-radio-button>
-                </paper-radio-group>
+                <template is="dom-if" if="{{ largeDevice }}">
+                    <h3>Choose grid size</h3>
+                    <p>How'd you like your grid today? Feeling like a giant?</p>
+                    <paper-radio-group selected="small" id="size">
+                        <paper-radio-button name="small">
+                            <div>
+                                <img src="/images/small.svg" alt="small">
+                                <small>Small</small>
+                            </div>
+                        </paper-radio-button>
+                        <paper-radio-button name="medium">
+                            <div>
+                                <img src="/images/medium.svg" alt="medium">
+                                <small>Medium</small>
+                            </div>
+                        </paper-radio-button>
+                        <paper-radio-button name="large">
+                            <div>
+                                <img src="/images/large.svg" alt="large">
+                                <small>Large</small>
+                            </div>
+                        </paper-radio-button>
+                    </paper-radio-group>
+                </template>
+
+                <template is="dom-if" if="{{ !largeDevice }}">
+                    <iron-swipeable-container>
+                        <paper-card heading="Well hello there, little one.">
+                            <div class="card-actions">
+                                If you play this game on the desktop you can choose three different sizes.
+                            </div>
+                        </paper-card>
+                    </iron-swipeable-container>
+                </template>
 
                 <h3>Choose difficulty</h3>
                 <p>How many mines? Don't be a baby, show off your mad skillz!</p>
