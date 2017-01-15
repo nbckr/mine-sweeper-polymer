@@ -50,7 +50,7 @@
         <iron-swipeable-container on-iron-swipe="_onSwipe">
         <template is="dom-if" if="{{_stateEquals(gamedata, 'GAME_LOST')}}">
             <paper-card heading="Whooops. You're dead." id="gameover-card">
-                <div class="card-actions">
+                <div class="card-content">
                     <img src="/images/tombstone-white.svg">
                     <p>Hate to say we told you so. <a href="#" on-click="_handleOpenModal">Don't cry, try again.</a></p>
                 </div>
@@ -59,10 +59,9 @@
 
         <template is="dom-if" if="{{_stateEquals(gamedata, 'GAME_WON')}}">
             <paper-card heading="You won and it was really awesome!" id="gamewon-card">
-                <div class="card-actions">
+                <div class="card-content">
                     <img src="/images/medal.svg">
-                    <p>We always knew you could do it. Huge success. Tremendous. <a href="#"
-                                                                                    on-click="_handleOpenModal">
+                    <p>We always knew you could do it. Huge success. Tremen&shy;dous. <a href="#" on-click="_handleOpenModal">
                         Okay enough of it now, play again.</a></p>
                 </div>
             </paper-card>
