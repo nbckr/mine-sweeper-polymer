@@ -141,7 +141,7 @@
 
             _handleStartButton: function () {
                 // On small devices, size option template is not rendered
-                var size = this.$$('#size')
+                var size = this.largeDevice //this.$$('#size')
                     ? this.$$('#size').selected
                     : 'small';
                 var difficulty = this.$.difficulty.selected;
