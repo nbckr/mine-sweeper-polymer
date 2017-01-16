@@ -35,7 +35,7 @@
             },
 
             listeners: {
-                'socket-send': '_sendToWebSocket'
+                'socket-send': 'sendToWebSocket'
             }
             ,
 
@@ -52,13 +52,12 @@
                 console.log('WS Error: ' + event.detail);
             },
 
-            _sendToWebSocket: function (event) {
+            sendToWebSocket: function (event) {
                 event.stopPropagation();
                 this.$.socket.send(event.detail);
             },
 
             _userChanged: function () {
-                console.log("USER CHANGE @d∆T∆");
                 this.$.socket.close();
                 this.$.socket.open();
             }

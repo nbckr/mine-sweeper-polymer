@@ -46,7 +46,6 @@
 
     <template>
 
-        <!-- TODO: Currently swipe removes the div forever -->
         <iron-swipeable-container on-iron-swipe="_onSwipe">
         <template is="dom-if" if="{{_stateEquals(gamedata, 'GAME_LOST')}}">
             <paper-card heading="Whooops. You're dead." id="gameover-card">
@@ -87,8 +86,7 @@
             },
 
             _onSwipe: function (e) {
-                console.log("swipe");
-                console.log(e);
+                // TODO: Could catch it and save from being deleted
             },
 
             _handleOpenModal: function () {

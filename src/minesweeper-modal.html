@@ -7,7 +7,7 @@
 <link rel="import" href="../bower_components/iron-swipeable-container/iron-swipeable-container.html"/>
 <link rel="import" href="../bower_components/paper-card/paper-card.html"/>
 
-<dom-module id="minesweeper-dialogue">
+<dom-module id="minesweeper-modal">
     <template>
         <style>
             :host {
@@ -123,10 +123,8 @@
                 </paper-radio-group>
             </form>
 
-            <paper-button dialog-confirm autofocus on-click="close" raised class="custom">Hell no!
-            </paper-button>
-            <paper-button dialog-confirm on-click="_handleStartButton" raised class="custom">Aww yeah!
-            </paper-button>
+            <paper-button dialog-confirm autofocus on-click="close" raised class="custom">Hell no!</paper-button>
+            <paper-button dialog-confirm on-click="_handleStartButton" raised class="custom">Aww yeah!</paper-button>
 
         </div>
     </template>
@@ -134,10 +132,8 @@
 </dom-module>
 
 <script>
-    (function () {
-        Polymer({
-
-            is: 'minesweeper-dialogue',
+    Polymer({
+            is: 'minesweeper-modal',
 
             behaviors: [
                 Polymer.IronOverlayBehavior
@@ -157,5 +153,4 @@
                 this.close();
             }
         });
-    })();
 </script>

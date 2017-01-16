@@ -95,11 +95,7 @@
             },
 
             _login: function () {
-                return this.$.auth.signInWithPopup()
-                    .then(function (response) { // successful authentication response here
-                    })
-                    .catch(function (error) {// unsuccessful authentication response here
-                    });
+                return this.$.auth.signInWithPopup();
             },
 
             _logout: function () {

@@ -129,15 +129,8 @@
                 var classes = 'surrounding-' + cell.surroundingMines;
 
                 if (this.state === 'GAME_LOST' && cell.hasMine) {
-                    //if (this.$.ripple) this.$.ripple.disable();
                     classes += 'hasMine isRevealed'
                 }
-
-                //if (this.state === 'NEW_GAME' && cell.hasMine) {
-                //    console.log("NEW")
-                //    if (this.$.ripple) this.$.ripple.enable();
-                //}
-
 
                 if (cell.isRevealed) {
                     classes += ' isRevealed';
@@ -180,8 +173,7 @@
 
             _handleOpenModal: function () {
                 if (this.$$('#ripple')) {
-                    //this.$$('#ripple').holdDown = false;
-                    //this.$$('#ripple').removeRipple();
+                    // TODO: Could change animation
                 }
             }
         });

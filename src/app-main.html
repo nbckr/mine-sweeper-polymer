@@ -122,7 +122,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </app-header-layout>
         </app-drawer-layout>
 
-        <minesweeper-dialogue id="modal" with-backdrop always-on-top on-websocket-send="_handleWebSocketSend"></minesweeper-dialogue>
+        <minesweeper-modal id="modal" with-backdrop always-on-top on-websocket-send="_handleWebSocketSend"></minesweeper-modal>
 
     </template>
 
@@ -170,16 +170,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             },
 
             _openModal: function () {
-                this.$$('#new-game-dialogue').open();
+                this.$.modal.open();
             },
 
             _handleWebSocketSend: function (event) {
-                // came from dialogue, hand down
-                this.$.data._sendToWebSocket(event);
+                // came from modal, hand down
+                this.$.data.sendToWebSocket(event);
             },
 
             _handleSocketSend: function (event) {
-                this.$.data._sendToWebSocket(event);
+                this.$.data.sendToWebSocket(event);
             }
 
         });
