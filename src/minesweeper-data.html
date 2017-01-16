@@ -7,7 +7,7 @@
 
         <!-- production: url="wss://minesweeper-htwg.herokuapp.com/socket" -->
         <web-socket id="socket"
-                    url="ws://localhost:9000/socket/{{ user.email }}"
+                    url="wss://minesweeper-htwg.herokuapp.com/socket/{{ user.email }}"
                     json
                     on-open="_onWebSocketOpen"
                     on-message="_onWebSocketMessage"
