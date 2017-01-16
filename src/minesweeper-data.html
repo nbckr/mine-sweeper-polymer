@@ -8,7 +8,7 @@
         <!-- production: url="wss://minesweeper-htwg.herokuapp.com/socket" -->
         <web-socket id="socket"
                     url="ws://localhost:9000/socket/{{ user.email }}"
-                    auto json
+                    json
                     on-open="_onWebSocketOpen"
                     on-message="_onWebSocketMessage"
                     on-error="_logWebSocketError"></web-socket>
@@ -58,7 +58,8 @@
             },
 
             _userChanged: function () {
-                this.$.socket.close();
+                // Manually connect with WebSocket to prevent a very short error in the transitions between users
+                this.$.socket.close(); // At first run, no socket exists, but the component just does nothing
                 this.$.socket.open();
             }
 
