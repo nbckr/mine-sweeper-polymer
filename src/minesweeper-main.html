@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html"/>
-<link rel="import" href="../bower_components/web-socket/web-socket.html"/>
 <link rel="import" href="../bower_components/paper-button/paper-button.html"/>
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html"/>
 <link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html"/>
@@ -32,19 +31,12 @@
 
     <template>
 
-        <!-- production: url="wss://minesweeper-htwg.herokuapp.com/socket" -->
-        <web-socket id="socket" url="ws://localhost:9000/socket"
-                    auto json
-                    on-open="_onWebSocketOpen"
-                    on-message="_onWebSocketMessage"
-                    on-error="_logWebSocketError"></web-socket>
-
         <paper-button raised class="custom" on-click="_handleOpenModal">
             <iron-icon icon="add-circle"></iron-icon>
             Start new game
         </paper-button>
 
-        <p>Hello, {{username}}. Feeling adventurous today?</p>
+        <p>Hello, {{user.displayName}}. Feeling adventurous today?</p>
 
         <minesweeper-message gamedata="{{gamedata}}"></minesweeper-message>
 
@@ -57,19 +49,19 @@
 
             is: 'minesweeper-main',
 
-            properties: {
-                gamedata: {
-                    type: Object,
-                    notify: true
-                },
-                state: {
-                    type: String,
-                    notify: true
-                },
-                username : {
-                    type: String
-                }
-            },
+            //properties: {
+            //    gamedata: {
+            //        type: Object,
+            //        notify: true
+            //    },
+            //    state: {
+            //        type: String,
+            //        notify: true
+            //    },
+            //    username : {
+            //        type: String
+            //    }
+            //},
 
             ready: function () {
                 // Prevent context menu
@@ -78,38 +70,12 @@
                 });
             },
 
-            listeners: {
-                'socket-send': '_sendToWebSocket'
-            }
-            ,
-
-            _onWebSocketOpen: function (event) {
-                this.$.socket.send({action: 'touch'});
-            },
-
-            _onWebSocketMessage: function (event) {
-                this.gamedata = event.detail;
-                this.state = event.detail.state;
-            },
-
-            _logWebSocketError: function (event) {
-                console.log('WS Error: ' + event.detail);
-            },
-
-            _sendToWebSocket: function (event) {
-                event.stopPropagation();
-                this.$.socket.send(event.detail);
-            }
-            ,
-
             // Don't use this for catching event that propagates from <minesweeper-message>, just fire from button
             _handleOpenModal: function (e) {
                 this.fire('open-modal');
-                // TODO this was just a fix for ripple animation: this.$.grid._handleOpenModal();
             },
 
             _gameOver: function () {
-                console.log("COMPUTE>>>>>")
                 return this.gamedata && this.gamedata.state == 'GAME_LOST';
             }
 

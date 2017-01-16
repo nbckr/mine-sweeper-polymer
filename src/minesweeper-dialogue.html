@@ -149,7 +149,7 @@
                     ? this.$$('#size').selected
                     : 'small';
                 var difficulty = this.$.difficulty.selected;
-                this.fire('websocket-send', {
+                this.fire('socket-send', {
                     action: 'start',
                     size: size,
                     difficulty: difficulty

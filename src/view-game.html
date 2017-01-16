@@ -25,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </style>
 
         <div class="card">
-            <minesweeper-main id="main" username="{{username}}"></minesweeper-main>
+            <minesweeper-main user="{{ user }}" gamedata="{{ gamedata }}"></minesweeper-main>
         </div>
     </template>
 
@@ -37,11 +37,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 user: {
                     type: Object
                 }
-            },
-
-            _handleWebSocketSend: function (event) {
-                // came from dialogue, hand down to minesweeper-main
-                this.$.main._sendToWebSocket(event);
             }
         });
     </script>

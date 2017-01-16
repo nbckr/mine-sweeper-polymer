@@ -25,6 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="minesweeper-auth.html">
 <link rel="import" href="minesweeper-login.html">
+<link rel="import" href="minesweeper-data.html">
 
 
 <dom-module id="app-main">
@@ -99,16 +100,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </app-toolbar>
                 </app-header>
 
+                <!-- Data access and authentication -->
                 <minesweeper-auth></minesweeper-auth>
-                <minesweeper-login on-new-login="_handleLogin" on-logout="_handleLogout"></minesweeper-login>
+                <minesweeper-login id="login" user="{{ user }}"></minesweeper-login>
+                <minesweeper-data id="data" user="{{ user }}" gamedata="{{ gamedata }}"></minesweeper-data>
 
+                <!-- Views -->
                 <iron-pages
                         selected="[[page]]"
                         attr-for-selected="name"
                         fallback-selection="view-404"
                         role="main">
                     <view-home name="view-home" id="view-home"></view-home>
-                    <view-game name="view-game" id="view-game" username="{{ username }}"></view-game>
+                    <view-game name="view-game" id="view-game"
+                               user="{{ user }}"
+                               gamedata="{{ gamedata }}"></view-game>
                     <view-instructions name="view-instructions"></view-instructions>
                     <view-about name="view-about"></view-about>
                     <view-404 name="view-404"></view-404>
@@ -116,7 +122,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </app-header-layout>
         </app-drawer-layout>
 
-        <minesweeper-dialogue id="new-game-dialogue" with-backdrop always-on-top on-websocket-send="_handleWebSocketSend"></minesweeper-dialogue>
+        <minesweeper-dialogue id="modal" with-backdrop always-on-top on-websocket-send="_handleWebSocketSend"></minesweeper-dialogue>
 
     </template>
 
@@ -130,9 +136,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     reflectToAttribute: true,
                     observer: '_pageChanged'
                 },
-                username : {
-                    type: String,
-                    value: 'Stranger',
+                user: {
+                    type: Object,
+                    notify: true
+                },
+                gamedata: {
+                    type: Object,
                     notify: true
                 }
             },
@@ -142,7 +151,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             ],
 
             listeners: {
-                'open-modal': '_openModal'
+                'open-modal': '_openModal',
+                'socket-send': '_handleSocketSend'
             },
 
             _routePageChanged: function (page) {
@@ -164,17 +174,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             },
 
             _handleWebSocketSend: function (event) {
-                // came from dialogue, hand down to minesweeper-main
-                this.$$('#view-game')._handleWebSocketSend(event);
+                // came from dialogue, hand down
+                this.$.data._sendToWebSocket(event);
             },
 
-            _handleLogin: function (event) {
-                console.log(event.detail)
-                this.username = event.detail;
-            },
-
-            _handleLogout: function () {
-                this.username = 'Stranger'
+            _handleSocketSend: function (event) {
+                this.$.data._sendToWebSocket(event);
             }
 
         });

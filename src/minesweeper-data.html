@@ -1,0 +1,69 @@
+<link rel="import" href="../bower_components/polymer/polymer.html"/>
+<link rel="import" href="../bower_components/web-socket/web-socket.html"/>
+
+<dom-module id="minesweeper-data">
+
+    <template>
+
+        <!-- production: url="wss://minesweeper-htwg.herokuapp.com/socket" -->
+        <web-socket id="socket"
+                    url="ws://localhost:9000/socket/{{ user.email }}"
+                    auto json
+                    on-open="_onWebSocketOpen"
+                    on-message="_onWebSocketMessage"
+                    on-error="_logWebSocketError"></web-socket>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'minesweeper-data',
+
+            properties: {
+                gamedata: {
+                    type: Object,
+                    notify: true
+                },
+                state: {
+                    type: String,
+                    notify: true
+                },
+                user: {
+                    type: Object,
+                    observer: '_userChanged'
+                }
+            },
+
+            listeners: {
+                'socket-send': '_sendToWebSocket'
+            }
+            ,
+
+            _onWebSocketOpen: function (event) {
+                this.$.socket.send({action: 'touch'});
+            },
+
+            _onWebSocketMessage: function (event) {
+                this.gamedata = event.detail;
+                this.state = event.detail.state;
+            },
+
+            _logWebSocketError: function (event) {
+                console.log('WS Error: ' + event.detail);
+            },
+
+            _sendToWebSocket: function (event) {
+                event.stopPropagation();
+                this.$.socket.send(event.detail);
+            },
+
+            _userChanged: function () {
+                console.log("USER CHANGE @d∆T∆");
+                this.$.socket.close();
+                this.$.socket.open();
+            }
+
+        });
+    </script>
+
+</dom-module>

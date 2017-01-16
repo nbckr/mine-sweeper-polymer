@@ -65,7 +65,7 @@
                 provider="google">
         </firebase-auth>
 
-        <template is="dom-if" if=[[user]]>
+        <template is="dom-if" if=[[!user.isLoggedOut]]>
             <div id="user-details">
                 <img src$="[[user.photoURL]]">
                 <p>[[user.displayName]]</p>
@@ -73,8 +73,8 @@
         </template>
 
         <div id="login-button">
-            <paper-button raised class="custom" on-tap="_login" hidden$="[[user]]">Sign in</paper-button>
-            <paper-button raised class="custom" on-tap="_logout" hidden$="[[!user]]">Sign out</paper-button>
+            <paper-button raised class="custom" on-tap="_login" hidden$="[[!user.isLoggedOut]]">Sign in</paper-button>
+            <paper-button raised class="custom" on-tap="_logout" hidden$="[[user.isLoggedOut]]">Sign out</paper-button>
         </div>
 
     </template>
@@ -87,7 +87,7 @@
                 user: {
                     type: Object,
                     notify: true,
-                    observer: '_userChanged'
+                    observer: '_userChanged' // TODO computed value?
                 },
                 statusKnown: {
                     type: Object
@@ -107,8 +107,25 @@
             },
 
             _userChanged: function () {
-                if (this.user) this.fire('new-login', this.user.displayName);
-                else this.fire('logout');
+                // If logged out, create generic user with an ID
+                if (!this.user) {
+                    this.user = {
+                        displayName: 'Stranger',
+                        email: this._generateGUID(),
+                        isLoggedOut: true
+                    };
+                }
+            },
+
+            _generateGUID: function () {
+                function s4() {
+                    return Math.floor((1 + Math.random()) * 0x10000)
+                        .toString(16)
+                        .substring(1);
+                }
+
+                return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                    s4() + '-' + s4() + s4() + s4();
             }
         });
     </script>
