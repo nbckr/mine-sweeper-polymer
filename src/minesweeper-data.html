@@ -44,6 +44,9 @@
             },
 
             _onWebSocketMessage: function (event) {
+                // We send pings periodically to keep WebSocket alive.
+                if (event.detail === 'ping') return;
+
                 this.gamedata = event.detail;
                 this.state = event.detail.state;
             },
